@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Todos from './components/Todos';
 import './App.css';
+import Header from './components/layout/Header';
 
 class App extends Component {
   state = {
@@ -34,10 +35,22 @@ class App extends Component {
     });
   };
 
+  rmTodo = id => {
+    this.setState({
+      // Spread operation
+      todos: [...this.state.todos.filter(t => t.id !== id)],
+    });
+  };
+
   render() {
     return (
       <div className="App">
-        <Todos todos={this.state.todos} markComplete={this.markComplete} />
+        <Header />
+        <Todos
+          todos={this.state.todos}
+          markComplete={this.markComplete}
+          rmTodo={this.rmTodo}
+        />
       </div>
     );
   }
